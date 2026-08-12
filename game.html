@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ミニ麻雀ゲーム</title>
   <style>
+    /* スマホで牌サイズを自動調整して必ず1段に収める */
+#hand {
+  display: flex;
+  flex-wrap: nowrap;     /* ★折り返し禁止 */
+  overflow-x: auto;      /* ★横スクロール許可（保険） */
+  gap: 6px;
+}
+
+/* 牌サイズを画面幅に応じて自動調整 */
+#hand .tile-img {
+  flex-shrink: 0;        /* ★牌が潰れない */
+  width: calc((100vw - 60px) / 5);   /* ★画面幅から自動計算して5枚並べる */
+  height: calc(((100vw - 60px) / 5) * 1.33); /* ★縦横比 60:80 を維持 */
+}
+
 /* スマホ専用レイアウト修正 */
 @media (max-width: 600px) {
 /* 画面全体の余白と文字サイズ */
