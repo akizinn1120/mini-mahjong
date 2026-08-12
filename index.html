@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<link rel="manifest" href="manifest.json">
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+  }
+</script>
+
+  <meta charset="UTF-8">
+  <title>ミニ麻雀へようこそ！</title>
+  <style>
+    body {
+      font-family: "Rounded Mplus 1c", sans-serif;
+      text-align: center;
+      background-color: #fff8dc;
+      margin: 0;
+      padding-top: 80px;
+    }
+
+    .start-button {
+      background-color: #ffcc66;
+      border: none;
+      border-radius: 10px;
+      padding: 20px 60px;
+      font-size: 1.8em;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+.start-comment {
+  font-size: 1.4em;
+  color: #444;
+  margin-top: 20px;
+}
+    .start-button:hover {
+      background-color: #ffdd88;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🀄 ミニ麻雀ゲーム 🀄</h1>
+
+  <button class="start-button" onclick="location.href='game.html'">
+    ゲーム開始
+  </button>
+<p class="start-comment">
+  ４枚麻雀をやってみよう！
+</p>
+<p class="start-comment">
+萬子と字牌バージョン（５枚目でアガリ）
+</p>
+<p class="start-comment">
+プログラム開発：みさぽーと　Ｓ氏　・　ＡＩ　Copilot
+</p>
+</body>
+</html>
