@@ -26,15 +26,15 @@
   body {
     margin: 0;
     padding: 10px;
-    font-size: 20px;
+    font-size: 18px; /* コメント小さめ */
     background-color: #f0f0f0;
   }
 /* 説明文（game-comment）を消えないように */
   .game-comment {
-    font-size: 22px;
-    line-height: 1.5;
+    font-size: 16px;
     text-align: center;
-    white-space: normal;
+    line-height: 1.4;
+    margin: 4px 0;
    }
 
  /* 捨て牌（river）を折り返さない */
@@ -57,14 +57,19 @@
     flex-wrap: nowrap;   /* ★折り返し禁止 */
     overflow-x: auto;    /* ★横スクロール許可 */
     gap: 6px;
+    padding-left: 6px;     /* ★左見切れ防止の余白 */
   }
-
+/* 手牌の牌サイズを画面幅から自動計算（必ず5枚1段） */
+  #hand .tile-img {
+    flex-shrink: 0;
+    width: calc((100vw - 60px) / 5);   /* ★画面幅から自動計算 */
+    height: calc(((100vw - 60px) / 5) * 1.33); /* ★縦横比維持 */
+  }
   .tile-img {
     width: 60px;
     height: 80px;
     flex-shrink: 0;
   }
-
   /* あがり牌が2段にならない */
   #winning-tiles {
     display: flex;
@@ -72,20 +77,17 @@
     overflow-x: auto;
     gap: 6px;
   }
-
   /* ボタンが縦にならない */
   .button-area {
     display: flex;
     justify-content: center;
   }
-
   .action-button {
     width: 90%;
-    font-size: 26px;
-    padding: 20px;
+    font-size: 24px;
+    padding: 18px;
     white-space: nowrap;
   }
-
   /* タイトル */
   h1 {
     font-size: 30px;
