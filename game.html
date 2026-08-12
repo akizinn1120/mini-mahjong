@@ -16,18 +16,23 @@
 /* 牌サイズを画面幅に応じて自動調整 */
 #hand .tile-img {
   flex-shrink: 0;        /* ★牌が潰れない */
-  width: calc((100vw - 60px) / 5);   /* ★画面幅から自動計算して5枚並べる */
-  height: calc(((100vw - 60px) / 5) * 1.33); /* ★縦横比 60:80 を維持 */
+  width: calc((100vw - 80px) / 5);   /* ★画面幅から自動計算して5枚並べる */
+  height: calc(((100vw - 80px) / 5) * 1.33); /* ★縦横比 60:80 を維持 */
 }
 
 /* スマホ専用レイアウト修正 */
 @media (max-width: 600px) {
-/* 画面全体の余白と文字サイズ */
+/* 画面全体 */
   body {
     margin: 0;
-    padding: 10px;
-    font-size: 18px; /* コメント小さめ */
+    padding: 0;
+    font-size: 18px;
     background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;   /* ★中央寄せ */
+    align-items: flex-start;   /* ★上から配置（中央に寄せすぎない） */
+    min-height: 100vh;
+  }
   }
 /* 説明文（game-comment）を消えないように */
   .game-comment {
@@ -43,6 +48,7 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     gap: 4px;
+    padding-left: 6px;
   }
 
   #river .tile-img {
@@ -50,7 +56,21 @@
   height: calc(((100vw - 40px) / 8) * 1.33);
   flex-shrink: 0;
   }
-
+ /* ゲーム全体の枠をスマホで中央に配置 */
+  .game-container {
+    width: 92%;                /* ★左右に余白を作る */
+    max-width: 480px;          /* ★スマホで中央に収まる */
+    margin: 20px auto;         /* ★上下左右中央 */
+    padding: 16px;
+    border-radius: 12px;
+    background-color: rgba(255,255,255,0.9);
+  }
+  /* 説明コメント：自動で小さく＋中央揃え */
+  .game-comment {
+    font-size: clamp(12px, 4vw, 16px); /* ★画面幅に応じて自動調整 */
+    text-align: center;
+    line-height: 1.4;
+    margin: 4px 0;
  /* 手牌（hand）を折り返さない ←ここが最重要 */
   #hand {
     display: flex;
@@ -90,7 +110,7 @@
   }
   /* タイトル */
   h1 {
-    font-size: 30px;
+    font-size: 26px;
     text-align: center;
   }
 }
