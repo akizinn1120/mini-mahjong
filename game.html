@@ -46,9 +46,9 @@
   }
 
   #river .tile-img {
-    width: 40px;
-    height: 53px;
-    flex-shrink: 0;
+  width: calc((100vw - 40px) / 8);  /* 捨て牌は8枚想定で計算 */
+  height: calc(((100vw - 40px) / 8) * 1.33);
+  flex-shrink: 0;
   }
 
  /* 手牌（hand）を折り返さない ←ここが最重要 */
