@@ -8,7 +8,7 @@
   }
 /* スマホ専用レイアウト修正 */
 @media (max-width: 600px) {
-
+/* 画面全体の余白と文字サイズ */
   body {
     margin: 0;
     padding: 10px;
@@ -17,10 +17,12 @@
   }
 
   /* 説明文が消えないようにする */
-  .game-comment {
-    font-size: 22px;
-    line-height: 1.5;
+  #description {
+    width: 100%;
+    font-size: 20px;
+    line-height: 1.4;
     text-align: center;
+    margin-bottom: 10px;
     white-space: normal;
   }
 
@@ -39,7 +41,7 @@
   }
 
   /* 手牌（hand）を折り返さない */
-  #hand {
+  #tile-container {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -95,7 +97,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       cursor: pointer;
     }
-
+/* 捨て牌をスマホ画面内に収める */
 .river-row {
   display: flex;
   justify-content: flex-start;   /* ★ 左寄せに変更 */
