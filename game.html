@@ -5,13 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ミニ麻雀ゲーム</title>
   <style>
-    /* スマホで牌サイズを自動調整して必ず1段に収める */
-#hand {
-  display: flex;
-  flex-wrap: nowrap;     /* ★折り返し禁止 */
-  overflow-x: auto;      /* ★横スクロール許可（保険） */
-  gap: 6px;
-}
+ }
 
 /* 牌サイズを画面幅に応じて自動調整 */
 #hand .tile-img {
@@ -44,10 +38,8 @@
  /* 捨て牌（river）を折り返さない */
   #river {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    justify-content: center;
     gap: 4px;
-    padding-left: 6px;
   }
 
   #river .tile-img {
