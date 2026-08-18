@@ -117,12 +117,13 @@
   padding: 0 4px;
 }
 /* 捨て牌のサイズも自動調整（最大8枚想定） */
+@media (max-width: 600px) {
   #river .tile-img {
     flex-shrink: 0;
     width: calc((90vw - 40px) / 6);   /* ★6枚で1段に収める */
     height: calc(((90vw - 40px) / 6) * 1.33);
   }
-  
+  }
 .action-button {
   display: flex;              /* ★中央寄せのためにflex化 */
   justify-content: center;    /* ★横方向の中央 */
