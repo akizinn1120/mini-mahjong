@@ -149,7 +149,7 @@ function drawTile() {
   messageDiv.textContent = "";
 
   if (wall.length === 0) {
-    messageDiv.textContent = "山が尽きました。ゲーム終了。";
+    messageDiv.textContent = "山が尽きました。プラウザを再読み込み！";
     return;
   }
   if (hand.length !== 4) {
