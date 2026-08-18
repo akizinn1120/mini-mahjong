@@ -62,12 +62,13 @@
     text-align: center;
     line-height: 1.3;
     margin: 2px 0;
- /* 手牌（hand）を折り返さない ←ここが最重要 */
- #hand {
+ /* 手牌（hand）を必ず1段にする＋左見切れ防止 */
+  #hand {
     display: flex;
-    justify-content: center;   /* 中央に並べる */
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 4px;
-    padding: 0 4px;            /* 左右見切れ防止 */
+    padding-left: 4px;         /* ★左見切れ防止 */
   }
   }
 /* 手牌の牌サイズを画面幅から自動計算（必ず5枚1段） */
