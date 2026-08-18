@@ -109,30 +109,33 @@ function startConfetti() {
 function render() {
   document.getElementById("wallCount").textContent = wall.length;
 
-  /* 捨て牌表示（左寄せ・6枚ごとに段を自動追加） */
+// 捨て牌2段構成
 const riverDiv = document.getElementById("river");
 riverDiv.innerHTML = "";
 
-// 6枚ごとに段を作る
-const tilesPerRow = 6;
+// 上段（1〜6枚）
+const row1 = document.createElement("div");
+row1.className = "river-row";
 
-for (let i = 0; i < river.length; i += tilesPerRow) {
+// 下段（7〜12枚）
+const row2 = document.createElement("div");
+row2.className = "river-row";
 
-  // 新しい段（row）を作る
-  const row = document.createElement("div");
-  row.className = "river-row";
+river.forEach((tile, index) => {
+  const img = document.createElement("img");
+  img.src = `tiles/${tile}.png`;
+  img.className = "tile-img";
 
-  // その段に入る牌を追加
-  const slice = river.slice(i, i + tilesPerRow);
+  if (index < 6) {
+    row1.appendChild(img);   // 上段
+  } else {
+    row2.appendChild(img);   // 下段
+  }
+});
 
-  slice.forEach(tile => {
-    const img = document.createElement("img");
-    img.src = `tiles/${tile}.png`;
-    img.className = "tile-img river-tile";
-    row.appendChild(img);
-  });
+riverDiv.appendChild(row1);
+riverDiv.appendChild(row2);
 
-  riverDiv.appendChild(row);
 }
 
 
