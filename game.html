@@ -20,7 +20,7 @@
     line-height: 1.5;
     margin: 4px 0;
   }
-}  
+  
 /* 画面全体 */
   body {
     margin: 0;
@@ -31,22 +31,8 @@
     align-items: flex-start;   /* ★上から配置（中央に寄せすぎない） */
     min-height: 100vh;
   }
- /* 捨て牌（river）を折り返さない */
-  #river {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    padding: 0 4px;
-    flex-wrap: nowrap;
-  }
 
-  #river .tile-img { 
-  flex-shrink: 0;
-  width: calc((90vw - 40px) / 8);  /* 捨て牌は8枚想定で計算 */
-  height: calc(((90vw - 40px) / 8) * 1.33);
- 
-  }
- /* ゲーム全体の枠をスマホで中央に配置 */
+   /* ゲーム全体の枠をスマホで中央に配置 */
   .game-container {
     width: 90vw;                /* ★左右に余白を作る */
     max-width: 420px;          /* ★スマホで中央に収まる */
