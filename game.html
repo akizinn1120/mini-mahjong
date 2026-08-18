@@ -136,11 +136,7 @@
     width: calc((90vw - 40px) / 6);   /* ★6枚で1段に収める */
     height: calc(((90vw - 40px) / 6) * 1.33);
   }
-    .tile-img.selected {
-      outline: 3px solid #ff6699;
-      background-color: #fff4c2;   
-      border-radius: 6px;
-    }
+  
 .action-button {
   display: flex;              /* ★中央寄せのためにflex化 */
   justify-content: center;    /* ★横方向の中央 */
@@ -153,7 +149,11 @@
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
-
+ .tile-img.selected {
+      outline: 3px solid #ff6699;
+      background-color: #fff4c2;   
+      border-radius: 6px;
+    }
 
 body {
   display: flex;
