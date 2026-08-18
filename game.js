@@ -109,37 +109,36 @@ function startConfetti() {
 function render() {
   document.getElementById("wallCount").textContent = wall.length;
 
-// 捨て牌2段構成
-const riverDiv = document.getElementById("river");
-riverDiv.innerHTML = "";
+  /* -----------------------------
+     捨て牌 2段構成
+  ----------------------------- */
+  const riverDiv = document.getElementById("river");
+  riverDiv.innerHTML = "";
 
-// 上段（1〜6枚）
-const row1 = document.createElement("div");
-row1.className = "river-row";
+  const row1 = document.createElement("div");
+  row1.className = "river-row";
 
-// 下段（7〜12枚）
-const row2 = document.createElement("div");
-row2.className = "river-row";
+  const row2 = document.createElement("div");
+  row2.className = "river-row";
 
-river.forEach((tile, index) => {
-  const img = document.createElement("img");
-  img.src = `tiles/${tile}.png`;
-  img.className = "tile-img";
+  river.forEach((tile, index) => {
+    const img = document.createElement("img");
+    img.src = `tiles/${tile}.png`;
+    img.className = "tile-img";
 
-  if (index < 6) {
-    row1.appendChild(img);   // 上段
-  } else {
-    row2.appendChild(img);   // 下段
-  }
-});
+    if (index < 6) {
+      row1.appendChild(img);
+    } else {
+      row2.appendChild(img);
+    }
+  });
 
-riverDiv.appendChild(row1);
-riverDiv.appendChild(row2);
+  riverDiv.appendChild(row1);
+  riverDiv.appendChild(row2);
 
-}
-
-
-  /* 手牌表示 */
+  /* -----------------------------
+     手牌表示
+  ----------------------------- */
   const handDiv = document.getElementById("hand");
   handDiv.innerHTML = "";
 
@@ -157,6 +156,7 @@ riverDiv.appendChild(row2);
     handDiv.appendChild(img);
   });
 }
+
 
 /* -----------------------------
    ツモ（引く）
