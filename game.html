@@ -94,8 +94,16 @@ body {
     width: calc((90vw - 40px) / 6);
     height: calc(((90vw - 40px) / 6) * 1.33);
   }
-}  
+}  /* ←スマホ用ここで終了 */
 
+/* PC版の捨て牌を2/3にする */
+@media (min-width: 601px) {
+  #river .tile-img {
+    width: 30px;　/* 45px × 0.66 */
+    height: 40px; /* 60px × 0.66 */
+  }
+}    
+    
 /* アガリ演出 */
 .win-message {
   font-size: 2.4em;
