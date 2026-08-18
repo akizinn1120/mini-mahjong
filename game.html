@@ -4,170 +4,128 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ミニ麻雀ゲーム</title>
+
   <style>
- /* 牌サイズを画面幅に応じて自動調整 */
-#hand .tile-img {
-  flex-shrink: 0;        /* ★牌が潰れない */
-  width: calc((90vw - 40px) / 5);   /* ★画面幅から自動計算して5枚並べる */
-  height: calc(((90vw - 40px) / 5) * 1.33); /* ★縦横比 60:80 を維持 */
-}
-
-/* スマホ専用レイアウト修正 */
-@media (max-width: 600px) {
-.game-comment {
-    font-size: clamp(16px, 4.5vw, 22px);  /* ★自動で大きさ調整 */
-    text-align: center;
-    line-height: 1.5;
-    margin: 4px 0;
-  }
-  
-/* 画面全体 */
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;   /* ★中央寄せ */
-    align-items: flex-start;   /* ★上から配置（中央に寄せすぎない） */
-    min-height: 100vh;
-  }
-
-   /* ゲーム全体の枠をスマホで中央に配置 */
-  .game-container {
-    width: 90vw;                /* ★左右に余白を作る */
-    max-width: 420px;          /* ★スマホで中央に収まる */
-    margin: 20px auto;         /* ★上下左右中央 */
-    padding: 12px;
-    background-color: rgba(255,255,255,0.9);
-    border-radius: 12px;
-  }
-    /* コメントを高齢者向けに大きく見やすく */
-  .game-comment {
-    font-size: clamp(16px, 4.5vw, 22px);  /* ★自動調整＋大きめ */
-    text-align: center;
-    line-height: 1.5;
-    margin: 4px 0;
-  }
-   
- /* 手牌（hand）を必ず1段にする＋左見切れ防止 */
-  #hand {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    padding: 0 4px;         
-  }
-  }
-/* 手牌の牌サイズを画面幅から自動計算（必ず5枚1段） */
-  #hand .tile-img {
-    flex-shrink: 0;
-    width: calc((90vw - 40px) / 5);   /* ★画面幅から自動計算 */
-    height: calc(((90vw - 40px) / 5) * 1.33); /* ★縦横比維持 */
-  }
-   /* あがり牌が2段にならない */
-  #winning-tiles {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 6px;
-  }
-  /* ボタンが縦にならない */
-  .button-area {
-    display: flex;
-    justify-content: center;
-  }
-   /* ボタンを完全中央寄せにする */
-  .action-button {
-    display: flex;               /* ★中央寄せのためにflex化 */
-    justify-content: center;     /* ★横方向中央 */
-    align-items: center;         /* ★縦方向中央 */
-    width: 90%;
-    font-size: 24px;
-    padding: 16px;               /* ★左右のpaddingを小さくしてズレ防止 */
-    white-space: nowrap;
-  }
-  /* タイトル */
-  h1 {
-    font-size: 24px;
-    text-align: center;
-  }
-}
-/* PC用コメント */
-     .game-comment {
-      font-size: 1.4em;
-      color: #444;
-      text-align: center;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-/* PC用牌サイズ */
-      .tile-img {
-      width: 45px;
-      height: 60px;
-      margin: 4px;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      cursor: pointer;
-    }
-/* 捨て牌の2段構成（正しいCSS） */
-.river-row {
-  display: flex;
-  flex-wrap: nowrap;     /* 行ごとに折り返さない */
-  justify-content: center;
-  gap: 4px;
-  padding: 0 4px;
-}
-/* 捨て牌のサイズも自動調整（最大8枚想定） */
-@media (max-width: 600px) {
-  #river .tile-img {
-    flex-shrink: 0;
-    width: calc((90vw - 40px) / 6);   /* ★6枚で1段に収める */
-    height: calc(((90vw - 40px) / 6) * 1.33);
-  }
-  }
-.action-button {
-  display: flex;              /* ★中央寄せのためにflex化 */
-  justify-content: center;    /* ★横方向の中央 */
-  align-items: center;        /* ★縦方向の中央 */
-  background-color: #ffcc66;
-  border: none;
-  border-radius: 14px;
-  padding: 30px 80px;
-  font-size: 2em;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
- .tile-img.selected {
-      outline: 3px solid #ff6699;
-      background-color: #fff4c2;   
-      border-radius: 6px;
-    }
-
+/* ------------------------------------
+   PC版（共通）スタイル
+------------------------------------ */
 body {
   display: flex;
-  justify-content: center;   /* 横方向の中央寄せ */
-  align-items: center;       /* 縦方向の中央寄せ */
-  height: 100vh;             /* 画面全体を使う */
+  justify-content: center;
+  align-items: flex-start;
   margin: 0;
   background-image: url("bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-.win-message {
-  font-size: 2.4em;        /* ★ 大きくする */
-  font-weight: bold;
-  color: #ff4444;          /* 赤系で目立たせる */
-  text-shadow: 0 0 10px #fff799;
-}
-/* ゲーム全体を包む枠 */
+
 .game-container {
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.85); /* 少し透けた白背景 */
+  background-color: rgba(255,255,255,0.85);
   padding: 20px 40px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  margin-top: 20px;
 }
-/* アガリ演出：光のエフェクト */
+
+.game-comment {
+  font-size: 1.4em;
+  color: #444;
+  line-height: 1.6;
+  margin: 6px 0;
+}
+
+.tile-img {
+  width: 45px;
+  height: 60px;
+  margin: 4px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.tile-img.selected {
+  outline: 3px solid #ff6699;
+  background-color: #fff4c2;
+}
+
+.action-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffcc66;
+  border: none;
+  border-radius: 14px;
+  padding: 20px 60px;
+  font-size: 2em;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  white-space: nowrap;
+}
+
+.river-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 4px;
+}
+
+/* ------------------------------------
+   スマホ専用スタイル
+------------------------------------ */
+@media (max-width: 600px) {
+
+  body {
+    background-color: #f0f0f0;
+    align-items: flex-start;
+  }
+
+  .game-container {
+    width: 90vw;
+    max-width: 420px;
+    margin: 20px auto;
+    padding: 12px;
+  }
+
+  .game-comment {
+    font-size: clamp(16px, 4.5vw, 22px);
+    line-height: 1.5;
+  }
+
+  #hand {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 0 4px;
+  }
+
+  #hand .tile-img {
+    width: calc((90vw - 40px) / 5);
+    height: calc(((90vw - 40px) / 5) * 1.33);
+  }
+
+  #river .tile-img {
+    width: calc((90vw - 40px) / 6);
+    height: calc(((90vw - 40px) / 6) * 1.33);
+  }
+
+  .action-button {
+    width: 90%;
+    font-size: 24px;
+    padding: 16px;
+  }
+}
+
+/* アガリ演出 */
+.win-message {
+  font-size: 2.4em;
+  font-weight: bold;
+  color: #ff4444;
+  text-shadow: 0 0 10px #fff799;
+}
+
 .win-effect {
   position: fixed;
   top: 50%;
@@ -188,27 +146,18 @@ body {
   100% { opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
 }
 
-/* アガリ時に手牌を光らせる */
-.tile-win {
-  box-shadow: 0 0 20px #fff799;
-  border-radius: 6px;
-}
-/* 雀頭（2枚組）を囲む枠 */
 .pair-highlight {
-  border: 4px solid #ff6666;   /* 赤枠 */
+  border: 4px solid #ff6666;
   border-radius: 8px;
   padding: 2px;
 }
 
-/* 面子（3枚組）を囲む枠 */
 .set-highlight {
-  border: 4px solid #6699ff;   /* 青枠 */
+  border: 4px solid #6699ff;
   border-radius: 8px;
   padding: 2px;
 }
 
-
-/* 紙吹雪の基本スタイル */
 .confetti {
   position: fixed;
   width: 10px;
@@ -222,17 +171,11 @@ body {
 }
 
 @keyframes fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  100% {
-    transform: translateY(110vh) rotate(360deg);
-  }
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
 }
-</style>
+  </style>
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 
 <body>
   <div class="game-container">
@@ -247,13 +190,10 @@ body {
     <div>山の残り枚数：<span id="wallCount"></span></div>
 
     <h2>捨て牌</h2>
-    <div id="river">
-  <div class="river-row" id="river-row-1"></div>
-  <div class="river-row" id="river-row-2"></div>
-</div>
+    <div id="river"></div>
 
     <h2>手牌</h2>
-    <div id="hand" class="hand"></div>
+    <div id="hand"></div>
 
     <div class="button-area">
       <button id="drawButton" class="action-button">引く・捨て</button>
@@ -262,6 +202,6 @@ body {
     <div id="message"></div>
 
     <script src="game.js"></script>
-  </div>  <!-- ★ ここで閉じる -->
+  </div>
 </body>
 </html>
