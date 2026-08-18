@@ -1,25 +1,21 @@
-let isGameLocked = false;   // ★ アガリ中は true にして操作停止
+/* ------------------------------------
+   基本変数
+------------------------------------ */
+let isGameLocked = false;   // アガリ中は操作停止
 const HONOR_LIST = ["east", "south", "west", "north", "white", "green", "red"];
 let wall = [];
 let hand = [];
 let river = [];
 let selectedIndex = null;
 
-/* -----------------------------
-   手牌を整理する関数
------------------------------ */
+/* ------------------------------------
+   手牌ソート
+------------------------------------ */
 function sortHand(hand) {
   const order = {
-    "m": 1,
-    "p": 2,
-    "s": 3,
-    "east": 4,
-    "south": 5,
-    "west": 6,
-    "north": 7,
-    "white": 8,
-    "green": 9,
-    "red": 10
+    "m": 1, "p": 2, "s": 3,
+    "east": 4, "south": 5, "west": 6, "north": 7,
+    "white": 8, "green": 9, "red": 10
   };
 
   return hand.sort((a, b) => {
@@ -30,16 +26,14 @@ function sortHand(hand) {
       if (am[2] !== bm[2]) return order[am[2]] - order[bm[2]];
       return parseInt(am[1]) - parseInt(bm[1]);
     }
-
     if (!am && !bm) return order[a] - order[b];
-
     return am ? -1 : 1;
   });
 }
 
-/* -----------------------------
-   山を作る
------------------------------ */
+/* ------------------------------------
+   山を作る（1〜9萬＋字牌）
+------------------------------------ */
 function createSmallWall() {
   const tiles = [];
 
@@ -51,6 +45,7 @@ function createSmallWall() {
     for (let i = 0; i < 4; i++) tiles.push(honor);
   }
 
+  // シャッフル
   for (let i = tiles.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
@@ -59,11 +54,11 @@ function createSmallWall() {
   return tiles;
 }
 
-/* -----------------------------
+/* ------------------------------------
    初期化
------------------------------ */
+------------------------------------ */
 function initGame() {
-  isGameLocked = false;   // ★ 次のゲームで操作再開
+  isGameLocked = false;
   wall = createSmallWall();
   hand = [];
   river = [];
@@ -77,9 +72,9 @@ function initGame() {
   render();
 }
 
-/* -----------------------------
+/* ------------------------------------
    桜吹雪演出
------------------------------ */
+------------------------------------ */
 function startConfetti() {
   for (let i = 0; i < 40; i++) {
     const confetti = document.createElement("div");
@@ -102,16 +97,17 @@ function startConfetti() {
     setTimeout(() => confetti.remove(), fallTime * 1000 + 500);
   }
 }
+
+/* ------------------------------------
+   画面表示（捨て牌は6枚ごとに段を増やす）
+------------------------------------ */
 function render() {
   document.getElementById("wallCount").textContent = wall.length;
 
-  /* -----------------------------
-     捨て牌：6枚ごとに新しい段を作る
-  ----------------------------- */
+  /* 捨て牌：6枚ごとに新しい段を作る */
   const riverDiv = document.getElementById("river");
   riverDiv.innerHTML = "";
 
-  // 6枚ずつに分割
   for (let i = 0; i < river.length; i += 6) {
     const row = document.createElement("div");
     row.className = "river-row";
@@ -126,9 +122,7 @@ function render() {
     riverDiv.appendChild(row);
   }
 
-  /* -----------------------------
-     手牌表示
-  ----------------------------- */
+  /* 手牌表示 */
   const handDiv = document.getElementById("hand");
   handDiv.innerHTML = "";
 
@@ -147,9 +141,9 @@ function render() {
   });
 }
 
-/* -----------------------------
+/* ------------------------------------
    ツモ（引く）
------------------------------ */
+------------------------------------ */
 function drawTile() {
   const messageDiv = document.getElementById("message");
   messageDiv.textContent = "";
@@ -170,24 +164,23 @@ function drawTile() {
 
   /* 和了判定 */
   if (isWin(hand)) {
-
-    isGameLocked = true;   // ★ ボタン操作を停止
+    isGameLocked = true;
     messageDiv.textContent = "アガリ！ 1面子＋1雀頭成立！おめでとう！";
     messageDiv.classList.add("win-message");
 
     const handDiv = document.getElementById("hand");
     handDiv.querySelectorAll("img").forEach(img => img.classList.add("tile-win"));
 
-    /* 光エフェクト */
+    // 光エフェクト
     const effect = document.createElement("div");
     effect.className = "win-effect";
     document.body.appendChild(effect);
     setTimeout(() => effect.remove(), 1200);
 
-    /* 桜吹雪 */
+    // 桜吹雪
     startConfetti();
 
-    /* 枠付け（雀頭＋面子） */
+    // 枠付け（雀頭＋面子）
     const winStruct = getWinningStructure(hand);
     if (winStruct) {
       const imgs = handDiv.querySelectorAll("img");
@@ -195,12 +188,8 @@ function drawTile() {
       imgs.forEach(img => {
         const tileName = img.src.split("/").pop().replace(".png", "");
 
-        if (winStruct.pair.includes(tileName)) {
-          img.classList.add("pair-highlight");
-        }
-        if (winStruct.set.includes(tileName)) {
-          img.classList.add("set-highlight");
-        }
+        if (winStruct.pair.includes(tileName)) img.classList.add("pair-highlight");
+        if (winStruct.set.includes(tileName)) img.classList.add("set-highlight");
       });
     }
 
@@ -216,9 +205,9 @@ function drawTile() {
   messageDiv.textContent = "アガリではありません。捨て牌を選んでください。";
 }
 
-/* -----------------------------
+/* ------------------------------------
    捨てる
------------------------------ */
+------------------------------------ */
 function discardSelected() {
   const messageDiv = document.getElementById("message");
 
@@ -236,9 +225,9 @@ function discardSelected() {
   render();
 }
 
-/* -----------------------------
+/* ------------------------------------
    和了判定
------------------------------ */
+------------------------------------ */
 function isWin(tiles) {
   if (tiles.length !== 5) return false;
 
@@ -277,9 +266,9 @@ function isSet(tiles3) {
          nums[1] + 1 === nums[2];
 }
 
-/* -----------------------------
+/* ------------------------------------
    アガリ形の構造（雀頭＋面子）
------------------------------ */
+------------------------------------ */
 function getWinningStructure(tiles) {
   const sorted = sortHand([...tiles]);
 
@@ -299,14 +288,13 @@ function getWinningStructure(tiles) {
   return null;
 }
 
-/* -----------------------------
+/* ------------------------------------
    ボタン動作
------------------------------ */
+------------------------------------ */
 window.onload = () => {
   initGame();
   document.getElementById("drawButton").onclick = () => {
 
-    // ★ アガリ中はボタン無効
     if (isGameLocked) return;
 
     if (hand.length === 4) {
