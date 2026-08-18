@@ -95,16 +95,6 @@ body {
     width: calc((90vw - 40px) / 6);
     height: calc(((90vw - 40px) / 6) * 1.33);
   }
-
-/* スマホ専用（幅を広くして押しやすく） */
-@media (max-width: 600px) {
-  .action-button {
-    width: 90%;              /* ★スマホは幅広く */
-    font-size: 24px;
-    padding: 16px;
-  }
-}
-
 /* アガリ演出 */
 .win-message {
   font-size: 2.4em;
@@ -161,7 +151,7 @@ body {
   0% { transform: translateY(0) rotate(0deg); }
   100% { transform: translateY(110vh) rotate(360deg); }
 }
-  /* PC版の引く・捨てボタン（大きく・オレンジ） */
+/* PC版の引く・捨てボタン（大きく・オレンジ） */
 .action-button {
   display: flex;
   justify-content: center;
@@ -177,6 +167,16 @@ body {
   margin: 0 auto;              /* ★中央寄せ */
   width: fit-content;          /* ★PCは自然な幅 */
 }
+
+/* スマホ専用（幅広く・押しやすく） */
+@media (max-width: 600px) {
+  .action-button {
+    width: 90%;                /* ★スマホは幅広く */
+    font-size: 24px;           /* ★スマホは少し小さめ */
+    padding: 16px;             /* ★スマホは余白少なめ */
+  }
+}
+
   </style>
 </head>
 
