@@ -102,39 +102,29 @@ function startConfetti() {
     setTimeout(() => confetti.remove(), fallTime * 1000 + 500);
   }
 }
-
-/* -----------------------------
-   画面表示
------------------------------ */
 function render() {
   document.getElementById("wallCount").textContent = wall.length;
 
   /* -----------------------------
-     捨て牌 2段構成
+     捨て牌：6枚ごとに新しい段を作る
   ----------------------------- */
   const riverDiv = document.getElementById("river");
   riverDiv.innerHTML = "";
 
-  const row1 = document.createElement("div");
-  row1.className = "river-row";
+  // 6枚ずつに分割
+  for (let i = 0; i < river.length; i += 6) {
+    const row = document.createElement("div");
+    row.className = "river-row";
 
-  const row2 = document.createElement("div");
-  row2.className = "river-row";
+    river.slice(i, i + 6).forEach(tile => {
+      const img = document.createElement("img");
+      img.src = `tiles/${tile}.png`;
+      img.className = "tile-img";
+      row.appendChild(img);
+    });
 
-  river.forEach((tile, index) => {
-    const img = document.createElement("img");
-    img.src = `tiles/${tile}.png`;
-    img.className = "tile-img";
-
-    if (index < 6) {
-      row1.appendChild(img);
-    } else {
-      row2.appendChild(img);
-    }
-  });
-
-  riverDiv.appendChild(row1);
-  riverDiv.appendChild(row2);
+    riverDiv.appendChild(row);
+  }
 
   /* -----------------------------
      手牌表示
@@ -156,7 +146,6 @@ function render() {
     handDiv.appendChild(img);
   });
 }
-
 
 /* -----------------------------
    ツモ（引く）
