@@ -49,21 +49,6 @@ body {
   outline: 3px solid #ff6699;
   background-color: #fff4c2;
 }
-
-.action-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffcc66;
-  border: none;
-  border-radius: 14px;
-  padding: 20px 60px;
-  font-size: 2em;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  white-space: nowrap;
-}
-
 .river-row {
   display: flex;
   flex-wrap: nowrap;
@@ -110,12 +95,31 @@ body {
     width: calc((90vw - 40px) / 6);
     height: calc(((90vw - 40px) / 6) * 1.33);
   }
+.action-button {
+  display: flex;
+  justify-content: center;   /* ★中央寄せ（横） */
+  align-items: center;       /* ★中央寄せ（縦） */
+  background-color: #ffcc66; /* ★オレンジ復活 */
+  border: none;
+  border-radius: 14px;
+  padding: 20px 40px;        /* ★左右の余白を適正化 */
+  font-size: 1.8em;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  margin: 0 auto;            /* ★中央寄せの決定打 */
+  width: fit-content;        /* ★PCでは自然な幅 */
+}
 
+/* スマホ専用（幅を広くして押しやすく） */
+@media (max-width: 600px) {
   .action-button {
-    width: 90%;
+    width: 90%;              /* ★スマホは幅広く */
     font-size: 24px;
     padding: 16px;
   }
+}
+
 }
 
 /* アガリ演出 */
