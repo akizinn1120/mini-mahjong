@@ -51,7 +51,7 @@
     width: 90vw;                /* ★左右に余白を作る */
     max-width: 420px;          /* ★スマホで中央に収まる */
     margin: 20px auto;         /* ★上下左右中央 */
-    padding: 16px;
+    padding: 12px;
     background-color: rgba(255,255,255,0.9);
     border-radius: 12px;
   }
@@ -66,7 +66,7 @@
  /* 手牌（hand）を必ず1段にする＋左見切れ防止 */
   #hand {
     display: flex;
-    flex-wrap: center;
+    justify-content: center;
     gap: 4px;
     padding-left: 0 4px;         /* ★左見切れ防止 */
   }
@@ -124,17 +124,18 @@
     }
  /* 捨て牌（スクロールなし固定視点） */
   #river {
+    .river-row {
     display: flex;
-    justify-content: center;   /* ★中央に並べる */
+    flex-wrap: nowrap;     /* ★折り返し禁止（行ごとに固定） */
+    justify-content: center;
     gap: 4px;
-    padding: 0 4px;            /* ★左右の見切れ防止 */
-    flex-wrap: nowrap;
-  }
+    padding: 0 4px;
+      }
 /* 捨て牌のサイズも自動調整（最大8枚想定） */
   #river .tile-img {
     flex-shrink: 0;
-    width: calc((90vw - 40px) / 8);   /* ★画面幅から自動計算 */
-    height: calc(((90vw - 40px) / 8) * 1.33);
+    width: calc((90vw - 40px) / 6);   /* ★6枚で1段に収める */
+    height: calc(((90vw - 40px) / 6) * 1.33);
   }
     .tile-img.selected {
       outline: 3px solid #ff6699;
@@ -260,7 +261,10 @@ body {
     <div>山の残り枚数：<span id="wallCount"></span></div>
 
     <h2>捨て牌</h2>
-    <div id="river" class="river"></div>
+    <div id="river">
+  <div class="river-row" id="river-row-1"></div>
+  <div class="river-row" id="river-row-2"></div>
+</div>
 
     <h2>手牌</h2>
     <div id="hand" class="hand"></div>
