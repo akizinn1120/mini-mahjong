@@ -95,6 +95,13 @@ body {
     height: calc(((90vw - 40px) / 6) * 1.33);
   }
 }  /* ←スマホ用ここで終了 */
+/* PC版の捨て牌（元のサイズに戻す） */
+@media (min-width: 601px) {
+  #river .tile-img {
+    width: 45px;
+    height: 60px;
+  }
+}
  
 /* アガリ演出 */
 .win-message {
