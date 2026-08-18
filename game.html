@@ -68,7 +68,7 @@
     display: flex;
     justify-content: center;
     gap: 4px;
-    padding-left: 0 4px;         /* ★左見切れ防止 */
+    padding: 0 4px;         
   }
   }
 /* 手牌の牌サイズを画面幅から自動計算（必ず5枚1段） */
@@ -105,7 +105,7 @@
     text-align: center;
   }
 }
-
+/* PC用コメント */
      .game-comment {
       font-size: 1.4em;
       color: #444;
@@ -113,7 +113,7 @@
       line-height: 1.6;
       margin-bottom: 20px;
     }
-
+/* PC用牌サイズ */
       .tile-img {
       width: 60px;
       height: 80px;
@@ -123,7 +123,6 @@
       cursor: pointer;
     }
  /* 捨て牌（スクロールなし固定視点） */
-  #river {
     .river-row {
     display: flex;
     flex-wrap: nowrap;     /* ★折り返し禁止（行ごとに固定） */
