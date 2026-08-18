@@ -41,31 +41,31 @@
     flex-wrap: nowrap;
   }
 
-  #river .tile-img {
+  #river .tile-img { 
+  flex-shrink: 0;
   width: calc((90vw - 40px) / 8);  /* 捨て牌は8枚想定で計算 */
   height: calc(((90vw - 40px) / 8) * 1.33);
-  flex-shrink: 0;
+ 
   }
  /* ゲーム全体の枠をスマホで中央に配置 */
   .game-container {
     width: 90vw;                /* ★左右に余白を作る */
     max-width: 420px;          /* ★スマホで中央に収まる */
-    margin: 16px auto;         /* ★上下左右中央 */
-    padding: 12px;
+    margin: 20px auto;         /* ★上下左右中央 */
+    padding: 16px;
     background-color: rgba(255,255,255,0.9);
     border-radius: 12px;
   }
   /* 説明コメント：小さく＋中央揃え */
   .game-comment {
-    font-size: clamp(9px, 3vw, 13px); /* ★画面幅に応じて自動調整 */
+    font-size: clamp(16px, 4.5vw, 22px); /* ★画面幅に応じて自動調整 */
     text-align: center;
-    line-height: 1.3;
-    margin: 2px 0;
+    line-height: 1.5;
+    margin: 4px 0;
  /* 手牌（hand）を必ず1段にする＋左見切れ防止 */
   #hand {
     display: flex;
     flex-wrap: center;
-    overflow-x: auto;
     gap: 4px;
     padding-left: 0 4px;         /* ★左見切れ防止 */
   }
@@ -88,10 +88,14 @@
     display: flex;
     justify-content: center;
   }
+   /* ボタンを完全中央寄せにする */
   .action-button {
+    display: flex;               /* ★中央寄せのためにflex化 */
+    justify-content: center;     /* ★横方向中央 */
+    align-items: center;         /* ★縦方向中央 */
     width: 90%;
-    font-size: 22px;
-    padding: 16px;
+    font-size: 24px;
+    padding: 16px;               /* ★左右のpaddingを小さくしてズレ防止 */
     white-space: nowrap;
   }
   /* タイトル */
