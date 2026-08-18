@@ -56,7 +56,13 @@ body {
   gap: 4px;
   padding: 0 4px;
 }
-
+/* PC版の捨て牌を2/3にする */
+@media (min-width: 601px) {
+  #river .tile-img {
+    width: 23px;　/* 自然に見える */
+    height: 30px; /* 比率3：4保持 */
+  }
+} 
 /* ------------------------------------
    スマホ専用スタイル
 ------------------------------------ */
@@ -95,15 +101,7 @@ body {
     height: calc(((90vw - 40px) / 6) * 1.33);
   }
 }  /* ←スマホ用ここで終了 */
-
-/* PC版の捨て牌を2/3にする */
-@media (min-width: 601px) {
-  #river .tile-img {
-    width: 23px;　/* 自然に見える */
-    height: 30px; /* 比率3：4保持 */
-  }
-}    
-    
+ 
 /* アガリ演出 */
 .win-message {
   font-size: 2.4em;
