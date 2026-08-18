@@ -122,14 +122,14 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       cursor: pointer;
     }
- /* 捨て牌（スクロールなし固定視点） */
-    .river-row {
-    display: flex;
-    flex-wrap: nowrap;     /* ★折り返し禁止（行ごとに固定） */
-    justify-content: center;
-    gap: 4px;
-    padding: 0 4px;
-      }
+/* 捨て牌の2段構成（正しいCSS） */
+.river-row {
+  display: flex;
+  flex-wrap: nowrap;     /* 行ごとに折り返さない */
+  justify-content: center;
+  gap: 4px;
+  padding: 0 4px;
+}
 /* 捨て牌のサイズも自動調整（最大8枚想定） */
   #river .tile-img {
     flex-shrink: 0;
