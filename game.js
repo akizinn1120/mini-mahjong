@@ -38,11 +38,11 @@ function createSmallWall() {
   const tiles = [];
 
   for (let num = 1; num <= 9; num++) {
-    for (let i = 0; i < 4; i++) tiles.push(`${num}m`);
+    for (let i = 0; i < 3; i++) tiles.push(`${num}m`);
   }
 
   for (const honor of HONOR_LIST) {
-    for (let i = 0; i < 4; i++) tiles.push(honor);
+    for (let i = 0; i < 3; i++) tiles.push(honor);
   }
 
   // シャッフル
